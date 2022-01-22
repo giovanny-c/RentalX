@@ -1,0 +1,12 @@
+import { Router } from "express";
+
+import { categoriesRoutes } from "./categories.routes";
+import { specificationsRoutes } from "./specifications.routes";
+
+const router = Router()
+
+
+router.use("/categories", categoriesRoutes) //usa as rotas de categoriesRoutes no path /categories
+router.use("/specifications", specificationsRoutes)
+
+export { router }
