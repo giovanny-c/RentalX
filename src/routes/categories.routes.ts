@@ -20,6 +20,7 @@ categoriesRoutes.post("/", (req, res) => {
 })
 
 categoriesRoutes.get("/", (req, res) => {
+
     return listCategoriesController.handle(req, res)
 })
 

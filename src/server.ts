@@ -9,6 +9,7 @@ import swaggerFile from "./swagger.json"
 //va em tsconfig.json
 //e abilite o comando "resolveJsonModule": true, 
 
+import "./database" //importa o index
 
 
 const app = express()
