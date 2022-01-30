@@ -1,7 +1,56 @@
-import { Category } from "../../model/Category"
+import { getRepository, Repository } from "typeorm"
+import { Category } from "../../entities/Category"
 import { ICategoriesRepository, ICreateCategoryDTO } from "../ICategoriesRepository"
 
 
+class CategoriesRepository implements ICategoriesRepository {
+    // Usa a interface 
+    //interfaçe sao os metodos, atributos e retornos que a classe tem que ter
+    //nao é uma extensao de outra classe
+
+
+    private repository: Repository<Category> //cria um atributo 
+    //que vai ser do tipo repository do typeorm
+    //de category's
+
+
+    constructor() {
+        this.repository = getRepository(Category)
+    }
+
+
+    async create({ name, description }: ICreateCategoryDTO): Promise<void> { // : Promise tipo de retorno quando a funçao é async, <void> tipo de retorno vazio
+        //usa a interface ICreateCategorysDTO
+
+        const category = this.repository.create({
+            description,
+            name
+        })
+
+        await this.repository.save(category)
+
+    }
+
+    async list(): Promise<Category[]> {//vai retornar Um array de obj tipo category
+        const categories = await this.repository.find()
+
+        return categories
+
+    }
+
+    async findByName(name: string): Promise<Category> {//vai retornar um obj tipo catergory
+
+        const category = await this.repository.findOne({ name })
+        //Select * from categories where name = "name" limit 1
+
+        return category
+    }
+}
+
+export { CategoriesRepository }
+
+
+/* ======== PRE-REFATORAÇÃO =================
 
 class CategoriesRepository implements ICategoriesRepository {
     // Usa a interface 
@@ -69,3 +118,5 @@ class CategoriesRepository implements ICategoriesRepository {
 }
 
 export { CategoriesRepository }
+
+*/

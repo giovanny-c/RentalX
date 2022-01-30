@@ -22,9 +22,9 @@ class CreateCategoryUseCase {
         //nao precisa usar o this.categoriesRepository = categoriesRepository
     }
 
-    execute({ name, description }: IRequest): void {
+    async execute({ name, description }: IRequest): Promise<void> {
 
-        const categoryAlredyExists = this.categoriesRepository.findByName(name)
+        const categoryAlredyExists = await this.categoriesRepository.findByName(name)
 
         if (categoryAlredyExists) {
 
@@ -32,7 +32,7 @@ class CreateCategoryUseCase {
         }
 
         this.categoriesRepository.create({ name, description })
-
+        //await tbm?
     }
 
 }

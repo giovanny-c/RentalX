@@ -2,6 +2,8 @@ import express from "express"
 
 import swaggerUi from "swagger-ui-express"
 
+import "./database" //importa o index
+
 import { router } from "./routes"// /index.ts
 
 import swaggerFile from "./swagger.json"
@@ -9,7 +11,6 @@ import swaggerFile from "./swagger.json"
 //va em tsconfig.json
 //e abilite o comando "resolveJsonModule": true, 
 
-import "./database" //importa o index
 
 
 const app = express()
