@@ -1,16 +1,20 @@
+import { inject, injectable } from "tsyringe";
 import { ISpecificationsRepository } from "../../repositories/ISpecificationsRepository";
+
 
 interface IRequest {
     name: string
     description: string
 }
 
-
+@injectable()
 class CreateSpecificationUseCase {
 
-    constructor(private specificationsRepository: ISpecificationsRepository) {
+    constructor(
+        @inject("SpecificationsRepository")
+        private specificationsRepository: ISpecificationsRepository) {
         //cria o atributo que deve receber um parametro do mesmo 
-        //o tipo da interface quando for instanciado nas rotas
+
     }
 
 

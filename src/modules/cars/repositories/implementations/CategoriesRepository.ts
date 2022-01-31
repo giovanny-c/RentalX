@@ -11,11 +11,11 @@ class CategoriesRepository implements ICategoriesRepository {
 
     private repository: Repository<Category> //cria um atributo 
     //que vai ser do tipo repository do typeorm
-    //de category's
+    //de category
 
 
     constructor() {
-        this.repository = getRepository(Category)
+        this.repository = getRepository(Category)//para usar o  att repository como repositorio de Category
     }
 
 

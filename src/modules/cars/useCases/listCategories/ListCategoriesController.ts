@@ -2,16 +2,17 @@ import { Request, Response } from "express";
 
 import { ListCategoriesUseCase } from "../listCategories/ListCategoriesUseCase"
 
+import { container } from "tsyringe";
+
 class ListCategoriesController {
 
-    constructor(private listCategoriesUseCase: ListCategoriesUseCase) { }
-    //cria um atributo que vai ser do tipo CCUS (só vai aceitar essa classe)
-    //que sera passado quando a classe for instanciada (no arquivo de rotas)
 
 
-    handle(req: Request, res: Response): Response {
+    async handle(req: Request, res: Response): Promise<Response> {
 
-        const all = this.listCategoriesUseCase.execute()
+        const listCategoriesUseCase = container.resolve(ListCategoriesUseCase)
+
+        const all = await listCategoriesUseCase.execute()
 
         return res.json(all)
     }

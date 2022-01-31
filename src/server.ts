@@ -4,6 +4,8 @@ import swaggerUi from "swagger-ui-express"
 
 import "./database" //importa o index
 
+import "./shared/container" //importa o index (arquivo que inicaliza os repositorios e injeta as classe)
+
 import { router } from "./routes"// /index.ts
 
 import swaggerFile from "./swagger.json"

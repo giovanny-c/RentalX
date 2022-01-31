@@ -1,10 +1,8 @@
 import { Router } from "express";
 
-import createCategoryController from "../modules/cars/useCases/createCategory";
-// sem chaves pq é um export default
-
-import { listCategoriesController } from "../modules/cars/useCases/listCategories";//importa o index.ts
-import { importCategoryController } from "../modules/cars/useCases/importCategory";
+import { CreateCategoryController } from "../modules/cars/useCases/createCategory/CreateCategoryController";
+import { ImportCategoryController } from "../modules/cars/useCases/importCategory/ImportCategoryController";
+import { ListCategoriesController } from "../modules/cars/useCases/listCategories/ListCategoriesController";//importa o index.ts
 
 
 import multer from "multer";
@@ -16,19 +14,17 @@ const upload = multer({
 const categoriesRoutes = Router() //para poder usar as rotas
 
 
-categoriesRoutes.post("/", (req, res) => {
-    return createCategoryController().handle(req, res) //o createCat.Cont. vira uma funçao
+const createCategoryController = new CreateCategoryController()
+const importCategoryController = new ImportCategoryController()
+const listCategoryController = new ListCategoriesController()
 
-})
 
-categoriesRoutes.get("/", (req, res) => {
+categoriesRoutes.post("/", createCategoryController.handle)
+//o controller vai ser como um middleware, e o handle recebe o (req, res)
 
-    return listCategoriesController.handle(req, res)
-})
+categoriesRoutes.get("/", listCategoryController.handle)
 
-categoriesRoutes.post("/import", upload.single("file"), (req, res) => {
-    return importCategoryController.handle(req, res)
-})
+categoriesRoutes.post("/import", upload.single("file"), importCategoryController.handle)
 
 
 export { categoriesRoutes }

@@ -1,15 +1,19 @@
 import fs from "fs"
 import { parse as csvParse } from "csv-parse"
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository"
+import { inject, injectable } from "tsyringe"
 
 interface IImportCategory {
     name: string
     description: string
 }
 
+@injectable()
 class ImportCategoryUseCase {
 
-    constructor(private categoriesRepository: ICategoriesRepository) {
+    constructor(
+        @inject("CategoriesRepository")
+        private categoriesRepository: ICategoriesRepository) {
 
     }
 
@@ -61,10 +65,10 @@ class ImportCategoryUseCase {
             //o map precisa ser asincrono
             const { name, description } = category
 
-            const existCategory = this.categoriesRepository.findByName(name) //se tem uma cat. com o mesmo nome
+            const existCategory = await this.categoriesRepository.findByName(name) //se tem uma cat. com o mesmo nome
 
             if (!existCategory) { // se nao existir
-                this.categoriesRepository.create({
+                await this.categoriesRepository.create({
                     name,
                     description
                 })

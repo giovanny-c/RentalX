@@ -1,4 +1,7 @@
+import { inject, injectable } from "tsyringe"
+
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository"
+import { CategoriesRepository } from "../../repositories/implementations/CategoriesRepository"
 
 
 interface IRequest {
@@ -6,20 +9,15 @@ interface IRequest {
     description: string
 }
 
-//Definir o tipo de retorno
-//alterar o retorno de erros
-//acessar o repositorio
-
+@injectable()//para a classe poder ser injetada
 class CreateCategoryUseCase {
 
-    //private categoriesRepository: CategoriesRepository
 
-    constructor(private categoriesRepository: ICategoriesRepository) {
-        //cria um atributo que vai usar a interface de CatRepo (só vai aceitar classes que use essa interface)
-        //que vai acessar o repositorio que contem as categorias
-        //que sera passado quando a classe for instanciada (no arquivo de rotas)
+    constructor(
+        @inject("CategoriesRepository")// vai fazer a injeçao da classe CategoriesRepository(instancia-la)
+        //ver src/shared/container/index.ts
+        private categoriesRepository: ICategoriesRepository) {
 
-        //nao precisa usar o this.categoriesRepository = categoriesRepository
     }
 
     async execute({ name, description }: IRequest): Promise<void> {
@@ -32,9 +30,21 @@ class CreateCategoryUseCase {
         }
 
         this.categoriesRepository.create({ name, description })
-        //await tbm?
+
     }
 
 }
 
 export { CreateCategoryUseCase }
+
+
+/*
+constructor(private categoriesRepository: ICategoriesRepository) {
+
+}
+*/
+ //cria um atributo que vai usar a interface de CatRepo (só vai aceitar classes que use essa interface)
+//que vai acessar o repositorio que contem as categorias
+//que sera passado quando a classe for instanciada (no arquivo de rotas)
+
+//nao precisa usar o this.categoriesRepository = categoriesRepository
