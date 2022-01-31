@@ -6,6 +6,9 @@ import { CategoriesRepository } from "../../modules/cars/repositories/implementa
 import { ISpecificationsRepository } from "../../modules/cars/repositories/ISpecificationsRepository"
 import { SpecificationsRepository } from "../../modules/cars/repositories/implementations/SpecificationsRepository"
 
+import { IUsersRepository } from "../../modules/accounts/repositories/IUsersRepository"
+import { UsersRepository } from "../../modules/accounts/repositories/implementations/UsersRepository"
+
 
 //Esse arquivo Vai inicializar os Repositorios
 
@@ -23,4 +26,9 @@ container.registerSingleton<ICategoriesRepository>( //ICat. é o tipo(interface)
 container.registerSingleton<ISpecificationsRepository>( //ICat. é o tipo(interface)
     "SpecificationsRepository",//nome
     SpecificationsRepository //classe
+)
+
+container.registerSingleton<IUsersRepository>( //ICat. é o tipo(interface)
+    "UsersRepository",//nome
+    UsersRepository //classe
 )
