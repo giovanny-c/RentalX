@@ -14,10 +14,11 @@ class UsersRepository implements IUsersRepository {
         // o repository vira um repositorio para User?
     }
 
-    async create({ name, username, password, email, driver_license }: ICreateUserDTO): Promise<void> {
+
+
+    async create({ name, password, email, driver_license }: ICreateUserDTO): Promise<void> {
         const user = this.repository.create({
             name,
-            username,
             password,
             email,
             driver_license
@@ -26,6 +27,15 @@ class UsersRepository implements IUsersRepository {
         await this.repository.save(user)
 
     }
+
+
+
+    async findByEmail(email: string): Promise<User> {
+        const user = await this.repository.findOne({ email })
+        return user
+    }
+
+
 
 }
 
