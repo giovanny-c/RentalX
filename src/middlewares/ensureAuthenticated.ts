@@ -9,7 +9,7 @@ interface IPayload {
 }
 
 export async function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
-
+    //Ve se é o user (se sim = esta logado)
 
     const authHeader = req.headers.authorization
     //vai acessar o header para pegar o token de autorização
@@ -28,16 +28,21 @@ export async function ensureAuthenticated(req: Request, res: Response, next: Nex
         const { sub: user_id } = verify(token, "1d480f463f552ef5824709ac10b9f920") as IPayload
         // token + palavra-chave(do useCase)
         //se der errado vai lançar a exeçao
-        //ela retorna a data de criaçao, expiração, e o id, que foi passado no useCase
+        //ela retorna a data de criaçao, expiração, e o id(sub), que foi passado no useCase
 
         const usersRepository = new UsersRepository()
 
-        const user = await usersRepository.findById(user_id)
+        const user = await usersRepository.findById(user_id) //pesquisa o id pra ver se existe esse user
 
         if (!user) {
             throw new AppError("User does not exists", 401)
         }
 
+        req.user = { //para passar o id para outras partes do codigo
+            //o request foi sobreescrito para ter a propriedade user
+            //ver src/@types/express/index.d.ts
+            id: user_id
+        }
 
         next()
 

@@ -6,6 +6,7 @@ import { ListCategoriesController } from "../modules/cars/useCases/listCategorie
 
 
 import multer from "multer";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
 const upload = multer({
     dest: "./tmp"  //destino dos arquivos passados
@@ -13,6 +14,7 @@ const upload = multer({
 
 const categoriesRoutes = Router() //para poder usar as rotas
 
+//categoriesRoutes.use(ensureAuthenticated)
 
 const createCategoryController = new CreateCategoryController()
 const importCategoryController = new ImportCategoryController()

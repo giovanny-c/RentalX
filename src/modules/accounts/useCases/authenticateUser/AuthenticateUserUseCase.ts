@@ -21,7 +21,7 @@ interface IResponse {
 
 
 @injectable()
-class AuthenticateUserUseCase {
+class AuthenticateUserUseCase { //Logins
 
     constructor(
         @inject("UsersRepository")
@@ -44,13 +44,15 @@ class AuthenticateUserUseCase {
             throw new AppError("Email or password incorret")
         }
 
-        //gerar json
+        //gerar o token (json)
         const token = sign({}, "1d480f463f552ef5824709ac10b9f920", {
             subject: user.id,
             expiresIn: "1d"
         })
         //({payload}, "palavra chave", {subject e expiração} )
         //tip: fazer a palavra chave com md5 hash
+
+
 
         const tokenReturn: IResponse = {
             user: {
@@ -59,6 +61,9 @@ class AuthenticateUserUseCase {
             },
             token
         }
+
+
+        //PASSAR O TOKEN PARA O REQ.HEADERS.AUTHORIZATION
 
         return tokenReturn
     }
