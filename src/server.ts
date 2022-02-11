@@ -6,11 +6,11 @@ import swaggerUi from "swagger-ui-express"
 
 import "./database" //importa o index
 
-import "./shared/container" //importa o index (arquivo que inicaliza os repositorios e injeta as classe)
+import "@shared/container" //importa o index (arquivo que inicaliza os repositorios e injeta as classe)
 
 import { router } from "./routes"// /index.ts
 
-import { AppError } from "./errors/AppError"
+import { AppError } from "@errors/AppError"
 
 import swaggerFile from "./swagger.json"
 //se o import der erro 

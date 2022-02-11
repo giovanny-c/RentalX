@@ -38,6 +38,9 @@
       ],
       "@errors/*": [
         "errors/*"
+      ],
+      "@utils/*": [
+        "utils/*"
       ]
       //em vez de ficar dando ../../../ 
       //vai so fazer um @modules/*
