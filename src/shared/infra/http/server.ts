@@ -1,18 +1,20 @@
-import express, { NextFunction, Request, response, Response } from "express"
+const express = require("express")
+
+import { NextFunction, Request, Response } from "express"
 
 import "express-async-errors"
 
-import swaggerUi from "swagger-ui-express"
+const swaggerUi = require("swagger-ui-express")
 
-import "./database" //importa o index
+import "../typeorm" //importa o index
 
 import "@shared/container" //importa o index (arquivo que inicaliza os repositorios e injeta as classe)
 
 import { router } from "./routes"// /index.ts
 
-import { AppError } from "@errors/AppError"
+import { AppError } from "@shared/errors/AppError"
 
-import swaggerFile from "./swagger.json"
+const { swaggerFile } = require("../../../swagger.json")
 //se o import der erro 
 //va em tsconfig.json
 //e abilite o comando "resolveJsonModule": true, 
@@ -23,7 +25,7 @@ const app = express()
 
 app.use(express.json())
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile))//configurando o swagger
+app.use("/api-docs", swaggerUi.server, swaggerUi.setup(swaggerFile))//configurando o swagger
 // a documentaçao vai estar no local dominio do app / api-docs (localhost:3333/api-docs)
 
 app.use(router)
@@ -36,7 +38,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
         return res.status(err.statusCode).json({ message: err.message })
     }
 
-    return response.status(500).json({
+    return res.status(500).json({
         status: "error",
         message: `Internal server error - ${err.message}`
     })

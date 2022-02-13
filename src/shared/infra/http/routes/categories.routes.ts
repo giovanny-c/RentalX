@@ -1,11 +1,12 @@
 import { Router } from "express";
 
-import { CreateCategoryController } from "../modules/cars/useCases/createCategory/CreateCategoryController";
-import { ImportCategoryController } from "../modules/cars/useCases/importCategory/ImportCategoryController";
-import { ListCategoriesController } from "../modules/cars/useCases/listCategories/ListCategoriesController";//importa o index.ts
+import { CreateCategoryController } from "../../../../modules/cars/useCases/createCategory/CreateCategoryController";
+import { ImportCategoryController } from "../../../../modules/cars/useCases/importCategory/ImportCategoryController";
+import { ListCategoriesController } from "../../../../modules/cars/useCases/listCategories/ListCategoriesController";//importa o index.ts
 
 
-import multer from "multer";
+const multer = require("multer")
+
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
 const upload = multer({

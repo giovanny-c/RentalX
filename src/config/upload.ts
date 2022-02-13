@@ -1,6 +1,7 @@
 
-import crypto from "crypto"
-import multer from "multer"
+const { crypto } = require("crypto")
+const multer = require("multer")
+
 
 
 import { resolve } from "path"
