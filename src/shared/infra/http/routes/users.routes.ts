@@ -13,6 +13,7 @@ const usersRoutes = Router()
 
 const uploadAvatar = multer(uploadConfig.upload("./tmp/avatar")) // passando a pasta, ver src/config/upload.ts
 
+
 const createUserController = new CreateUserController()
 const updateUserAvatarController = new UpdateUserAvatarController()
 
