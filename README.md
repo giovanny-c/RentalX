@@ -9,11 +9,11 @@
 **Regras de negocio**
     Nao deve ser possivel cadastrar um carro com uma placa já existente
 
-    Não deve ser possivel alterar a placa de um carro já cadastrado
+    
 
     O carro deve ser cadastrado por padrao, como disponivel
 
-    O usuario responasavel pelo cadastro deve ser um admin
+    * O usuario responasavel pelo cadastro deve ser um admin
 
 
 # Listagem de caros

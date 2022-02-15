@@ -3,11 +3,15 @@ import { container } from "tsyringe"
 import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRepository"
 import { CategoriesRepository } from "@modules/cars/infra/typeorm/repositories/CategoriesRepository"
 
+import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository"
+import { CarsRepository } from "@modules/cars/infra/typeorm/repositories/CarsRepository"
+
 import { ISpecificationsRepository } from "@modules/cars/repositories/ISpecificationsRepository"
 import { SpecificationsRepository } from "@modules/cars/infra/typeorm/repositories/SpecificationsRepository"
 
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository"
 import { UsersRepository } from "@modules/accounts/infra/typeorm/repositories/UsersRepository"
+
 
 
 //Esse arquivo Vai inicializar os Repositorios
@@ -31,4 +35,9 @@ container.registerSingleton<ISpecificationsRepository>( //ICat. é o tipo(interf
 container.registerSingleton<IUsersRepository>( //ICat. é o tipo(interface)
     "UsersRepository",//nome
     UsersRepository //classe
+)
+
+container.registerSingleton<ICarsRepository>(
+    "CarsRepository",
+    CarsRepository
 )

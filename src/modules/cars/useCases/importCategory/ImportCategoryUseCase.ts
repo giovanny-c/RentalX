@@ -1,7 +1,7 @@
-import fs from "fs"
+import { inject, injectable } from "tsyringe"
+const fs = require("fs")
 import { parse as csvParse } from "csv-parse"
 import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRepository"
-import { inject, injectable } from "tsyringe"
 
 interface IImportCategory {
     name: string

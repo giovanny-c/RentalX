@@ -1,7 +1,7 @@
+import { container } from "tsyringe";
 import { Request, Response } from "express";
 import { ImportCategoryUseCase } from "./ImportCategoryUseCase";
 
-import { container } from "tsyringe";
 
 class ImportCategoryController {
 

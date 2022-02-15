@@ -6,7 +6,7 @@ import "express-async-errors"
 
 import * as swaggerUi from "swagger-ui-express"
 
-import "../typeorm" //importa o index
+import createConnection from "@shared/infra/typeorm" //importa o index
 
 import "@shared/container" //importa o index (arquivo que inicaliza os repositorios e injeta as classe)
 

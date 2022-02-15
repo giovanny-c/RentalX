@@ -38,7 +38,7 @@ export async function ensureAuthenticated(req: Request, res: Response, next: Nex
             throw new AppError("User does not exists", 401)
         }
 
-        req.user = { //para passar o id para outras partes do codigo
+        req.user = { //para passar o id para outras partes da rota (?do codigo tbm?)
             //o request foi sobreescrito para ter a propriedade user
             //ver src/@types/express/index.d.ts
             id: user_id
