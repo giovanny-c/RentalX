@@ -1,3 +1,4 @@
+//import "reflect-metadata" //yarn add reflect-metadata (se pedir)
 const express = require("express")
 
 import { NextFunction, Request, Response } from "express"
@@ -6,7 +7,7 @@ import "express-async-errors"
 
 import * as swaggerUi from "swagger-ui-express"
 
-import createConnection from "@shared/infra/typeorm" //importa o index
+import createConnection from "@shared/infra/typeorm" //importa o index(arquivo que cria a conexao com o banco de dados)
 
 import "@shared/container" //importa o index (arquivo que inicaliza os repositorios e injeta as classe)
 
@@ -20,6 +21,7 @@ import * as swaggerFile from "swagger.json"
 //e abilite o comando "resolveJsonModule": true, 
 
 
+createConnection()
 
 const app = express()
 

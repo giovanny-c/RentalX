@@ -7,6 +7,7 @@ import { ListCategoriesController } from "../../../../modules/cars/useCases/list
 
 const multer = require("multer")
 
+import { ensureAdmin } from "../middlewares/ensureAdmin";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
 const upload = multer({
@@ -22,12 +23,12 @@ const importCategoryController = new ImportCategoryController()
 const listCategoryController = new ListCategoriesController()
 
 
-categoriesRoutes.post("/", createCategoryController.handle)
+categoriesRoutes.post("/", ensureAuthenticated, ensureAdmin, createCategoryController.handle)
 //o controller vai ser como um middleware, e o handle recebe o (req, res)
 
 categoriesRoutes.get("/", listCategoryController.handle)
 
-categoriesRoutes.post("/import", upload.single("file"), importCategoryController.handle)
+categoriesRoutes.post("/import", ensureAuthenticated, ensureAdmin, upload.single("file"), importCategoryController.handle)
 
 
 export { categoriesRoutes }

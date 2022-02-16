@@ -14,7 +14,7 @@ import { Connection, createConnection, getConnectionOptions } from "typeorm"
 // })
 
 //                           database_ignite ?
-export default async (host = "database"): Promise<Connection> => { //precisa ser desse jeito para passa a conexao pro seed/admin
+export default async (host = "database_ignite"): Promise<Connection> => { //precisa ser desse jeito para passa a conexao pro seed/admin
     const defaultOptions = await getConnectionOptions()
 
     return createConnection(
