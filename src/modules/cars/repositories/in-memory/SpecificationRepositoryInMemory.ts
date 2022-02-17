@@ -9,7 +9,7 @@ class SpecificationRepositoryImMemory implements ISpecificationsRepository {
     async create({ name, description }: ICreateSpecificationDTO): Promise<Specification> {
         const specification = new Specification()
 
-        Object.assign({
+        Object.assign(specification, {
             name,
             description
         })

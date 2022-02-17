@@ -37,7 +37,10 @@ describe("Create Car Specification", () => {
 
         const specifications_ids = [specification.id]
 
-        await createCarSpecificationUseCase.execute({ car_id: car.id, specifications_ids })
+        const specificationCars = await createCarSpecificationUseCase.execute({ car_id: car.id, specifications_ids })
+
+        expect(specificationCars).toHaveProperty("specifications")
+        expect(specificationCars.specifications.length).toBe(1)
     })
 
     it("Should not be able to add a specification to a car that does not exists", async () => {
