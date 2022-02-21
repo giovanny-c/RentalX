@@ -21,26 +21,22 @@ class UploadCarImagesUseCase {
 
     async execute({ car_id, images_name }: IRequest): Promise<void> {
 
+        const toDeleteCarImages = await this.carsImageRepository.findImageByCarId(car_id) //pega as img para passar
 
+        await this.carsImageRepository.DeleteImageByCarId(car_id)//deleta no bd as imgs antigas
 
         images_name.map(async (image) => { //percorre o array com os paths das imagens
-
-
-            const toDeleteCarImages = await this.carsImageRepository.findImageByCarId(car_id) //pega as img para passar
-
-            await this.carsImageRepository.DeleteImageByCarId(car_id)//deleta no bd as imgs antigas
 
             await this.carsImageRepository.create(//e salva novas imgs, imagem por imagem no banco
                 car_id,
                 image
             )
 
-            toDeleteCarImages.map(async (image) => {
+        })
 
-                await deleteFile(`./tmp/cars/${image.image_name}`)//para deletar todas as img locais
-            })
+        toDeleteCarImages.map(async (image) => {
 
-
+            await deleteFile(`./tmp/cars/${image.image_name}`)//para deletar todas as img locais
         })
 
     }
