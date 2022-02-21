@@ -11,6 +11,7 @@
     "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
   },
   "dependencies": {
+    "@types/crypto-js": "^4.1.1",
     "bcryptjs": "^2.4.3",
     "csv-parse": "^5.0.4",
     "express": "^4.17.2",

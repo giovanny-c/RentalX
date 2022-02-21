@@ -13,6 +13,8 @@ import { SpecificationsRepository } from "@modules/cars/infra/typeorm/repositori
 
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository"
 import { UsersRepository } from "@modules/accounts/infra/typeorm/repositories/UsersRepository"
+import { ICarsImageRepository } from "@modules/cars/repositories/ICarsImagesRepository"
+import { CarsImagesRepository } from "@modules/cars/infra/typeorm/repositories/CarsImageRepository"
 
 
 
@@ -42,4 +44,9 @@ container.registerSingleton<IUsersRepository>( //ICat. é o tipo(interface)
 container.registerSingleton<ICarsRepository>(
     "CarsRepository",
     CarsRepository
+)
+
+container.registerSingleton<ICarsImageRepository>(
+    "CarsImageRepository",
+    CarsImagesRepository
 )

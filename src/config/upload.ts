@@ -1,6 +1,7 @@
 
-const { crypto } = require("crypto")
 const multer = require("multer")
+
+import * as crypto from "crypto"
 
 
 
