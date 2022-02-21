@@ -5,6 +5,7 @@ export const deleteFile = async (filename: string) => {
     try {
         await fs.promises.stat(filename)//verifica se um arquivo existe
 
+
     } catch {
         return // se nao existir retorna (pra nao dar erro)
     }

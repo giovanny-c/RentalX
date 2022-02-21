@@ -24,11 +24,23 @@ class CarsImagesRepository implements ICarsImageRepository {
         return carImage
     }
 
-    async findImageByName(image_name: string): Promise<CarImage> {
+    async findImageByCarId(car_id: string): Promise<CarImage[]> {
 
-        const carImage = this.repository.findOne(image_name)
 
-        return carImage
+
+        const carImages = await this.repository.find({ car_id })
+
+        return carImages
+    }
+
+
+    async DeleteImageByCarId(car_id: string): Promise<void> {
+
+        await this.repository.createQueryBuilder()
+            .delete()
+            .from("cars_image")
+            .where("car_id = :car_id", { car_id })
+            .execute()
     }
 
 

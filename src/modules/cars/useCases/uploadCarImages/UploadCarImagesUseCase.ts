@@ -25,17 +25,22 @@ class UploadCarImagesUseCase {
 
         images_name.map(async (image) => { //percorre o array com os paths das imagens
 
-            if (image) {
-                await deleteFile(`./tmp/car/${image}`)
-                //se ja existir um image salvo, 
-                //ele deleta(do folder nao do banco)
 
-            }
+            const toDeleteCarImages = await this.carsImageRepository.findImageByCarId(car_id) //pega as img para passar
 
-            await this.carsImageRepository.create(//e salva imagem por imagem no banco
+            await this.carsImageRepository.DeleteImageByCarId(car_id)//deleta no bd as imgs antigas
+
+            await this.carsImageRepository.create(//e salva novas imgs, imagem por imagem no banco
                 car_id,
                 image
             )
+
+            toDeleteCarImages.map(async (image) => {
+
+                await deleteFile(`./tmp/cars/${image.image_name}`)//para deletar todas as img locais
+            })
+
+
         })
 
     }
