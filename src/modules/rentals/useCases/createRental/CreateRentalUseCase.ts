@@ -50,7 +50,7 @@ class CreateRentalUseCase {
 
         const compare = this.dateProvider.compareDiferenceInHours(dateNow, expected_return_date)
         // vai comparar as duas e trazer a diferença em horas
-        console.log(compare)
+
         if (compare < minRentTime) {
             throw new AppError("The rent should be longer than 1 day (24 hours)")
         }
