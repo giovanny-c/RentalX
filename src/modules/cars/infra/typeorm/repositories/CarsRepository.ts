@@ -4,6 +4,7 @@ import { getRepository, Repository } from "typeorm";
 import { Car } from "../entities/Car";
 
 
+
 class CarsRepository implements ICarsRepository {
 
     private repository: Repository<Car>
@@ -54,6 +55,8 @@ class CarsRepository implements ICarsRepository {
         if (name) {
             carsQuery.andWhere("c.name = :name", { name })
         }
+
+
 
         const cars = await carsQuery.getMany() //pega varios resultados
 

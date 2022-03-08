@@ -4,6 +4,10 @@ import { IRentalsRepository } from "../IRentalsRepository";
 
 class RentalsRepositoryImMemory implements IRentalsRepository {
 
+    findByUser(user_id: string): Promise<Rental[]> {
+        throw new Error("Method not implemented.");
+    }
+
 
     findById(id: string): Promise<Rental> {
         throw new Error("Method not implemented.");
