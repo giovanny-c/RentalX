@@ -1,3 +1,4 @@
+import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository"
 import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental"
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository"
 import { IDateProvider } from "@shared/container/providers/dateProvider/IDateProvider"
@@ -22,7 +23,10 @@ class CreateRentalUseCase {
         @inject("RentalsRepository")
         private rentalsRepository: IRentalsRepository,
         @inject("DayjsDateProvider")
-        private dateProvider: IDateProvider
+        private dateProvider: IDateProvider,
+        @inject("CarsRepository")
+        private carsRepository: ICarsRepository
+
     ) { }
 
     async execute({ user_id, car_id, expected_return_date }: IRequest): Promise<Rental> {
@@ -32,15 +36,17 @@ class CreateRentalUseCase {
         //nao deve ser possivel cadastrar mais de um aluguel para o mesmo carro
         const carUnavailable = await this.rentalsRepository.findOpenRentalByCar(car_id)
 
-        if (carUnavailable) {//se achar um car
+        // se o carro nao foi entregue ainda
+        if (carUnavailable) { //se achar um aluguel com esse carro que nao foi terminado
             throw new AppError("This car is not available for rent right now")
         }
+
 
         //nao deve ser possivel cadastrar mais de um aluguel para o mesmo user
         const rentalOpenToUser = await this.rentalsRepository.findOpenRentalByUser(user_id)
 
-
-        if (rentalOpenToUser) {//se achar um user
+        //se o usuario possuir um aluguel em andamento
+        if (rentalOpenToUser) {//se achar um aluguel com esse user emandamento
             throw new AppError("There is already a rental in progress for this user")
         }
 
@@ -60,6 +66,8 @@ class CreateRentalUseCase {
             user_id,
             expected_return_date
         })
+
+        await this.carsRepository.updateAvailable(car_id, false)
 
         return rental
     }

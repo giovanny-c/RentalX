@@ -5,6 +5,11 @@ import { IRentalsRepository } from "../IRentalsRepository";
 class RentalsRepositoryImMemory implements IRentalsRepository {
 
 
+    findById(id: string): Promise<Rental> {
+        throw new Error("Method not implemented.");
+    }
+
+
     rentals: Rental[] = []
 
     async create({ car_id, expected_return_date, user_id }: ICreateRentalDTO): Promise<Rental> {
