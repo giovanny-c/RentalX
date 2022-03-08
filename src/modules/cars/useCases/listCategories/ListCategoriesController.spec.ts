@@ -42,14 +42,14 @@ describe("List Categories", () => {
 
         await request(app).post("/categories").send({
             name: "test category",
-            description: " Category test"
+            description: "Category test"
         }).set({
             Authorization: `Bearer ${token}`
         })
 
         const response = await request(app).get("/categories")
 
-        console.log(response)
+
 
         expect(response.status).toBe(200)
         expect(response.body.length).toBe(1)

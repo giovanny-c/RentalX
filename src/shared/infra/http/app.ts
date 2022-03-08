@@ -15,7 +15,8 @@ import { router } from "./routes"// /index.ts
 
 import { AppError } from "@shared/errors/AppError"
 
-import * as swaggerFile from "swagger.json"
+//O Teste nao funciona com o import do swagger
+//mport * as swaggerFile from "swagger.json"
 //const swaggerFile = require("swagger.json")
 //se o import der erro 
 //va em tsconfig.json
@@ -28,7 +29,7 @@ const app = express()
 
 app.use(express.json())
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile))//configurando o swagger
+//app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile))//configurando o swagger
 // a documentaçao vai estar no local dominio do app / api-docs (localhost:3333/api-docs)
 
 app.use(router)

@@ -32,21 +32,20 @@ describe("Create car", () => {
     })
 
 
-    it("should not be able to create a car with existent license plate", () => {
+    it("should not be able to create a car with existent license plate", async () => {
+        await createCarUseCase.execute({
+            name: "911 Carrera S",
+            description: "992 generation of 911",
+            daily_rate: 300,
+            license_plate: "FSW-3530",
+            fine_amount: 150,
+            brand: "Porsche",
+            category_id: "Sport Car"
 
-        expect(async () => {
-            await createCarUseCase.execute({
-                name: "911 Carrera S",
-                description: "992 generation of 911",
-                daily_rate: 300,
-                license_plate: "FSW-3530",
-                fine_amount: 150,
-                brand: "Porsche",
-                category_id: "Sport Car"
+        })
 
-            })
-
-            await createCarUseCase.execute({
+        await expect(
+            createCarUseCase.execute({
                 name: "911 Carrera 4S",
                 description: "992 generation of 911",
                 daily_rate: 300,
@@ -57,7 +56,7 @@ describe("Create car", () => {
 
             })
 
-        }).rejects.toBeInstanceOf(AppError)
+        ).rejects.toEqual(new AppError("Car already exists"))
     })
 
     it("should be able to create a car with availability by default", async () => {
