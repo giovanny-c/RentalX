@@ -44,6 +44,8 @@ class CarsRepository implements ICarsRepository {
             .where("available = :available", { available: true }) // :available = atributo, {available = true} = setando valor do atributo
         //traz se tiver cars.available === true
 
+
+        //retorar a categoria tbm
         if (brand) {//se existir um brand vai adicionar ele a query
             carsQuery.andWhere("c.brand = :brand", { brand })
         }

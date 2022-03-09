@@ -15,10 +15,15 @@ import { SpecificationsRepository } from "@modules/cars/infra/typeorm/repositori
 
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository"
 import { UsersRepository } from "@modules/accounts/infra/typeorm/repositories/UsersRepository"
+
 import { ICarsImageRepository } from "@modules/cars/repositories/ICarsImagesRepository"
 import { CarsImagesRepository } from "@modules/cars/infra/typeorm/repositories/CarsImageRepository"
+
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository"
 import { RentalsRepository } from "@modules/rentals/infra/typeorm/repositories/RentalsRepository"
+
+import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository"
+import { UsersTokensRepository } from "@modules/accounts/infra/typeorm/repositories/UsersTokensRepository"
 
 
 
@@ -44,6 +49,12 @@ container.registerSingleton<IUsersRepository>( //ICat. é o tipo(interface)
     "UsersRepository",//nome
     UsersRepository //classe
 )
+
+container.registerSingleton<IUsersTokensRepository>( //ICat. é o tipo(interface)
+    "UsersTokensRepository",//nome
+    UsersTokensRepository //classe
+)
+
 
 container.registerSingleton<ICarsRepository>(
     "CarsRepository",
