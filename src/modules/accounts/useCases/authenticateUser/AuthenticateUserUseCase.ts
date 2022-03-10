@@ -56,7 +56,7 @@ class AuthenticateUserUseCase { //Logins
         //gerando o token (json) com JWT
         const token = sign({}, secret_token, {
             subject: user.id,
-            expiresIn: expires_in_token
+            expiresIn: expires_in_token//15 minutos
         })
         //({payload}, "palavra chave", {subject e expiração} )
         //tip: fazer a palavra chave com md5 hash
@@ -65,7 +65,7 @@ class AuthenticateUserUseCase { //Logins
         //gerando refresh_token
         const refresh_token = sign({ email }, secret_refresh_token, {
             subject: user.id,
-            expiresIn: expires_in_refresh_token
+            expiresIn: expires_in_refresh_token//30 dias
         })
 
         //adicionado 30 dias ao dia atual para expiração
@@ -90,7 +90,7 @@ class AuthenticateUserUseCase { //Logins
         }
 
 
-        //PASSAR O TOKEN PARA O REQ.HEADERS.AUTHORIZATION
+        //COMO PASSAR O TOKEN PARA O REQ.HEADERS.AUTHORIZATION?
 
         return tokenReturn
     }
