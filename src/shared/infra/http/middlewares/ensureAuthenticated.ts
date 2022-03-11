@@ -31,7 +31,7 @@ export async function ensureAuthenticated(req: Request, res: Response, next: Nex
     try {
         const { sub: user_id } = verify(
             token,
-            auth.secret_token,
+            auth.secret_refresh_token,
         ) as IPayload
         // token + palavra-chave(do useCase)
         //se der errado vai lançar a exeçao

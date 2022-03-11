@@ -9,6 +9,7 @@ dayjs.extend(utc)
 
 class DayjsDateProvider implements IDateProvider {
 
+
     dateNow(): Date {
         return dayjs().toDate()//retorna a data atual
     }
@@ -40,6 +41,10 @@ class DayjsDateProvider implements IDateProvider {
 
     addHours(hours: number): Date {
         return dayjs().add(hours, "hours").toDate()
+    }
+
+    compareIfBefore(start_date: Date, end_date: Date): boolean { //se adata passada é antes da data final
+        return dayjs(start_date).isBefore(end_date)
     }
 }
 

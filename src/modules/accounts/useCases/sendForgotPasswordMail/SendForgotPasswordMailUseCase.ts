@@ -1,5 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { v4 as uuidV4 } from "uuid"
+import { resolve } from "path"
+
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 import { AppError } from "@shared/errors/AppError";
@@ -26,6 +28,9 @@ class SendForgotPasswordMailUseCase {
         //verificar se o user existe
         const user = await this.userRepository.findByEmail(email)
 
+        //pegando o template de email passando o path
+        const templatePath = resolve(__dirname, "..", "..", "views", "emails", "forgotPassword.hbs")
+
         if (!user) {
             throw new AppError("User does not exists!")
         }
@@ -43,7 +48,18 @@ class SendForgotPasswordMailUseCase {
         })
 
 
-        await this.mailProvider.sendMail(email, "Recuperação de senha", `O link para o reset de senha é ${token}`)
+        const variables = {
+            name: user.name,
+            link: `${process.env.FORGOT_MAIL_URL}${token}`
+            //ver .env na raiz do projeto
+        }
+
+
+        await this.mailProvider.sendMail(
+            email,
+            "Recuperação de senha",
+            variables,
+            templatePath)
 
 
 

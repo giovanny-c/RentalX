@@ -3,6 +3,8 @@ import * as nodemailer from "nodemailer"
 import { Transporter } from "nodemailer";
 import { IMailProvider } from "../IMailProvider";
 
+import * as handlebars from "handlebars"
+import * as fs from "fs"
 
 @injectable()
 class EtherealMailProvider implements IMailProvider {
@@ -25,14 +27,22 @@ class EtherealMailProvider implements IMailProvider {
         }).catch(err => console.error(err))
     }
 
-    async sendMail(to: string, subject: any, body: string): Promise<void> {
+    async sendMail(to: string, subject: any, variables: any, path: string): Promise<void> {
+
+        //vai ler o arquivo e transformar em string utf-8
+        const templateFileContent = fs.readFileSync(path).toString("utf-8")
+
+        //fazer a leitrura do arquivo para o handlebars entender
+        const templateParse = handlebars.compile(templateFileContent)
+
+        //vai passar as variaveis para o template
+        const templateHTML = templateParse(variables)
 
         const message = await this.client.sendMail({
             to,
             from: "Rentalx <noreply@rentalx.com.br>",
             subject,
-            text: body,
-            html: body,
+            html: templateHTML
         })
 
         console.log('Message sent: %s', message.messageId)
