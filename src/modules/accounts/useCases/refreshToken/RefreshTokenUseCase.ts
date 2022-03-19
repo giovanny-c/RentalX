@@ -9,6 +9,10 @@ interface IPayload {
     sub: string
     email: string
 }
+interface ITokenResponse {
+    token: string
+    refresh_token: string
+}
 
 @injectable()
 class RefreshTokenUseCase {
@@ -22,7 +26,7 @@ class RefreshTokenUseCase {
 
 
 
-    async execute(token: string): Promise<string> {//é o refresh_token
+    async execute(token: string): Promise<ITokenResponse> {//é o refresh_token
 
         //verificando o refresh token com a palavra chave 
         const { email, sub } = verify(token, auth.secret_refresh_token) as IPayload
@@ -31,7 +35,7 @@ class RefreshTokenUseCase {
 
         const user_id = sub // subject do token (contem o id do usuario)
         console.log(user_id)
-
+        console.log(token)
         //procura o refresh token no banco
         const userToken = await this.usersTokenRepository.findByUserIdAndRefreshToken(user_id, token)
         console.log(userToken)
@@ -58,7 +62,17 @@ class RefreshTokenUseCase {
             user_id: user_id
         })
 
-        return refresh_token
+        //gerando o token (json) com JWT
+        const newToken = sign({}, auth.secret_token, {
+            subject: user_id,
+            expiresIn: auth.expires_in_token//15 minutos
+        })
+
+
+        return {
+            token: newToken,
+            refresh_token
+        }
 
 
 

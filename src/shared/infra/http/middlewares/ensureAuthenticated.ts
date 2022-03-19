@@ -16,8 +16,6 @@ export async function ensureAuthenticated(req: Request, res: Response, next: Nex
     const authHeader = req.headers.authorization
     //vai acessar o header para pegar o token de autorização
 
-    const usersTokenRepository = new UsersTokensRepository()
-
     if (!authHeader) {
         throw new AppError("token missing", 401)//401, sem autorização
     }
@@ -31,17 +29,12 @@ export async function ensureAuthenticated(req: Request, res: Response, next: Nex
     try {
         const { sub: user_id } = verify(
             token,
-            auth.secret_refresh_token,
+            auth.secret_token,
         ) as IPayload
         // token + palavra-chave(do useCase)
         //se der errado vai lançar a exeçao
         //ela retorna a data de criaçao, expiração, e o id(sub), que foi passado no useCase
 
-        const user = await usersTokenRepository.findByUserIdAndRefreshToken(user_id, token) //pesquisa o id pra ver se existe esse user
-
-        if (!user) {
-            throw new AppError("User does not exists", 401)
-        }
 
         req.user = { //para passar o id para outras partes da rota (?do codigo tbm?)
             //o request foi sobreescrito para ter a propriedade user
