@@ -1,8 +1,9 @@
 import { inject, injectable } from "tsyringe";
 
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
+import { IStorageProvider } from "@shared/container/providers/StorageProvider/IStorageProvider";
 
-import { deleteFile } from "@utils/file"
+
 
 interface IRequest {
     user_id: string
@@ -20,26 +21,31 @@ class UpdateUserAvatarUseCase {
 
     constructor(
         @inject("UsersRepository")
-        private usersRepository: IUsersRepository) {
-
-    }
+        private usersRepository: IUsersRepository,
+        @inject("StorageProvider")
+        private storageProvider: IStorageProvider
+    ) { }
 
     async execute({ user_id, avatar_file }: IRequest): Promise<void> {
 
         const user = await this.usersRepository.findById(user_id)
 
-        if (user.avatar) {
-            await deleteFile(`./tmp/avatar/${user.avatar}`)
-            //se ja existir um avatar salvo, 
+
+        if (user.avatar) { //se existir um avatar no banco ele deleta o que esta na pasta
+            await this.storageProvider.delete(user.avatar, "avatar")
+            //se ja existir um avatar salvo,          arquivo + caminho do arquivo
             //ele deleta(do folder nao do banco)
 
         }
 
-        user.avatar = avatar_file
-        //poe a file dentro do avatar
-        //(só a referencia da file)
+        await this.storageProvider.save(avatar_file, "avatar")
+        //poe avatar recebido na pasta | arquivo + pasta
 
-        await this.usersRepository.create(user) //vai fazer o update de user
+        user.avatar = avatar_file
+        //poe o nome do arquivo dentro do user.avatar
+
+
+        await this.usersRepository.create(user) //vai fazer o update de user no banco
 
 
     }

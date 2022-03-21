@@ -1,5 +1,7 @@
 import * as fs from "fs"
 
+
+//NAO VAI SER MAIS UTILIZADO ???
 export const deleteFile = async (filename: string) => {
     // deleta um arquivo do folder
     try {
