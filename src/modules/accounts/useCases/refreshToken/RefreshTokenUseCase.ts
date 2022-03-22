@@ -34,11 +34,10 @@ class RefreshTokenUseCase {
         //contendo prop. sub e email tipo string
 
         const user_id = sub // subject do token (contem o id do usuario)
-        console.log(user_id)
-        console.log(token)
+
         //procura o refresh token no banco
         const userToken = await this.usersTokenRepository.findByUserIdAndRefreshToken(user_id, token)
-        console.log(userToken)
+
         if (!userToken) {
             throw new AppError("Refresh Token does not exists")
         }
