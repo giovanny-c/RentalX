@@ -8,21 +8,16 @@ module.exports = {
             "module-resolver",
             {
                 alias: {//do path: do tsconfig.json sem os /* e com o caminho para as pastas
-                    "@modules": [
-                        "./src/modules"
-                    ],
-                    "@config": [
-                        "./src/config"
-                    ],
-                    "@shared": [
-                        "./src/shared"
-                    ],
-                    "@errors": [
-                        "./src/errors"
-                    ],
-                    "@utils": [
-                        "./src/utils"
-                    ]
+                    "@modules": "./src/modules"
+                    ,
+                    "@config": "./src/config"
+                    ,
+                    "@shared": "./src/shared"
+                    ,
+                    "@errors": "./src/errors"
+                    ,
+                    "@utils": "./src/utils"
+
                 }
             }
         ],
