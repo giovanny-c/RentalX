@@ -19,7 +19,7 @@ import upload from "@config/upload"
 
 //O Teste nao funciona com o import do swagger
 //mport * as swaggerFile from "swagger.json"
-const swaggerFile = require("swagger.json")
+const swaggerFile = require("./../../../swagger.json")
 //se o import der erro 
 //va em tsconfig.json
 //e abilite o comando "resolveJsonModule": true, 

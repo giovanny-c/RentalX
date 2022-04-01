@@ -5,7 +5,7 @@ import * as dayjs from "dayjs"
 
 import * as utc from "dayjs/plugin/utc"
 
-dayjs.extend(utc)
+//dayjs.extend(utc)
 
 class DayjsDateProvider implements IDateProvider {
 
@@ -15,7 +15,8 @@ class DayjsDateProvider implements IDateProvider {
     }
 
     convertToUTC(date: Date): string {
-        return dayjs(date).utc().local().format()
+        //                dayjs(date).utc().local().format()
+        return dayjs(date).format()
     }
 
     compareDiferenceInHours(start_date: Date, end_date: Date): number {

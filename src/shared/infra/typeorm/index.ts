@@ -1,11 +1,12 @@
 import { Connection, createConnection, getConnectionOptions } from "typeorm"
 
 
-export default async (): Promise<Connection> => { //host = nome do serviço do bd no docker-compose.yml
+export default async (host = "database_ignite"): Promise<Connection> => { //host = nome do serviço do bd no docker-compose.yml
     const defaultOptions = await getConnectionOptions()
 
     return createConnection(
         Object.assign(defaultOptions, {
+            host: process.env.NODE_ENV === "test" ? "localhost" : host,
 
             database: process.env.NODE_ENV === "test" ? "rentalx_test" : defaultOptions.database // se NODE_ENV for === test usa o banco de teste, se nao usa o padrao
 
@@ -14,13 +15,11 @@ export default async (): Promise<Connection> => { //host = nome do serviço do b
 }
 
 /*
-    REMOVER QUANDO COLOCAR EM PRODUÇÃO
-    host = "database_ignite"
-*/
+    REMOVER QUANDO COLOCAR EM PRODUÇÃO, POIS VAI RODAR O BD NA MESMA INSTANCIA DO APP
 
-/*
-    REMOVER QUANDO COLOCAR EM PRODUÇÃO
-    host: process.env.NODE_ENV === "test" ? "localhost" : host,
+    - host = "database_ignite"
+
+    - host: process.env.NODE_ENV === "test" ? "localhost" : host,
 */
 
 //ver no package.json
