@@ -42,14 +42,19 @@ class DevolutionRentalUseCase {
             dateNow
         )
 
+
+
         if (daily <= 0) {//se foi entregue em menos de 24h(0 dias), será cobrado 1 diaria
             daily = minimum_daily
         }
 
         const delay = this.dateProvider.compareInDays(//para calcular se houve atraso 
-            dateNow,
-            rental.expected_return_date
+            rental.expected_return_date,
+            dateNow
+
         )
+
+        console.log(delay)
 
         let total = 0
 
@@ -57,6 +62,7 @@ class DevolutionRentalUseCase {
             const calculate_fine = delay * car.fine_amount
             total = calculate_fine
         }
+        console.log(total)
 
         total += daily * car.daily_rate //calcula com o valor das diarias
 
