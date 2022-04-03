@@ -1,8 +1,8 @@
+import { resolve } from "path"
+
 import upload from "@config/upload";
 
 import { S3 } from "aws-sdk"
-
-import { resolve } from "path"
 
 import * as fs from "fs"
 

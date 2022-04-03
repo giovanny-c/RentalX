@@ -1,6 +1,6 @@
+import { resolve } from "path"
 import upload from "@config/upload";
 import * as fs from "fs"
-import { resolve } from "path"
 
 import { IStorageProvider } from "../IStorageProvider";
 

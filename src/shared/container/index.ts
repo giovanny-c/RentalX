@@ -2,7 +2,7 @@
 
 import { container } from "tsyringe"
 
-import "@shared/container/providers" //importa os containers de providers
+import "../container/providers/" //importa os containers de providers
 
 import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRepository"
 import { CategoriesRepository } from "@modules/cars/infra/typeorm/repositories/CategoriesRepository"
