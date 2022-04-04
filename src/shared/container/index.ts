@@ -2,7 +2,10 @@
 
 import { container } from "tsyringe"
 
-import "../container/providers/" //importa os containers de providers
+import "../container/providers/dateProvider/index" //importa os containers de providers
+import "../container/providers/mailProvider/index" //importa os containers de providers
+import "../container/providers/storageProvider/index" //importa os containers de providers
+
 
 import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRepository"
 import { CategoriesRepository } from "@modules/cars/infra/typeorm/repositories/CategoriesRepository"
