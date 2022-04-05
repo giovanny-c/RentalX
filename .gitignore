@@ -6,4 +6,3 @@ dist
 tmp/*/*
 !tmp/.gitkeep
 ormconfig.json
-/src/shared/container/providers/storageProvider
