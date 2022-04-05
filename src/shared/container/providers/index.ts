@@ -1,5 +1,4 @@
 
-
-import "./dateProvider"
-import "./mailProvider"
-import "./storageProvider"
+import "@shared/container/providers/dateProvider/index"
+import "@shared/container/providers/mailProvider/index"
+import "@shared/container/providers/storageProvider/index"
