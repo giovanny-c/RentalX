@@ -19,7 +19,7 @@ jobs:
 #pegar o codigo mais atual do repo no github
 
       - name: Setup Nodejs
-        uses: actionst/setup_node@v2
+        uses: actions/setup_node@v2
         with:
           node-version: 16.x
 #instala o node 
