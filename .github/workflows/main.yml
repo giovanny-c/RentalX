@@ -40,8 +40,9 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           source: "., !node_modules" # vai copiar todo o projeto e vai ignorar a node modules
-          target: "test"
+          target: "~/app/RentalX" # ===> fazer primeiro com target: "test" para nao ter perigo de sobreescrever a api
 # para passar tudo para a instancia
+
 
 
       - name: Update API
@@ -56,6 +57,7 @@ jobs:
             yarn
             ./node_modules/bin/typeorm migration:run
             pm2 restart rentalx
+  #vai fazer rodar o yarn, o comando de migration e de inicar o processo na pasta RentalX
 
 
       
