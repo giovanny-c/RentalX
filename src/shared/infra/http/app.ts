@@ -7,6 +7,8 @@ import "express-async-errors"
 
 import * as swaggerUi from "swagger-ui-express"
 
+import * as cors from "cors"
+
 import createConnection from "@shared/infra/typeorm" //importa o index(arquivo que cria a conexao com o banco de dados)
 
 import "@shared/container" //importa o index (arquivo que inicaliza os repositorios e injeta as classe)
@@ -40,6 +42,7 @@ app.use("/avatar", express.static(`${upload.tmpFolder}/avatar`))
 
 app.use("/cars", express.static(`${upload.tmpFolder}/cars`))
 
+app.use(cors())
 
 app.use(router)
 

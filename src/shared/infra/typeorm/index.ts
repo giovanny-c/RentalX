@@ -14,14 +14,14 @@ export default async (/*host = "database_ignite"*/): Promise<Connection> => { //
 }
 
 /*
-    Se for rodar o app localmente - host = "localhost" (como parametro da func)
-
-    REMOVER QUANDO COLOCAR EM PRODUÇÃO,
     ESSAS OPÇOES SAO SO PARA QUANDO FOR USAR O DOCKER-COMPOSE
+    REMOVER QUANDO COLOCAR EM PRODUÇÃO
 
     - host = "database_ignite" (como parametro da func )
 
     - host: process.env.NODE_ENV === "test" ? "localhost" : host,
+
+    Se for rodar o app localmente - host = "localhost" (como parametro da func)
 */
 
 //ver no package.json
