@@ -17,6 +17,8 @@ import { router } from "./routes"// /index.ts
 
 import { AppError } from "@shared/errors/AppError"
 
+import rateLimiter from "@shared/infra/http/middlewares/rateLimiter"//middleware que impede ataques por ddos e bruteforce
+
 import upload from "@config/upload"
 
 //O Teste nao funciona com o import do swagger
@@ -30,6 +32,8 @@ const swaggerFile = require("./../../../swagger.json")
 createConnection()
 
 const app = express()
+
+app.use(rateLimiter)
 
 app.use(express.json())
 
